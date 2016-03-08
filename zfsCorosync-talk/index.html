@@ -120,9 +120,13 @@ sockets: 1
 
 ---
 ## What is ZFS
+
 ### * Designed by Sun, started production in 2006
 ### * Aims to replace raid controller, software raid, LVM, file system (Ext4/UFS)
 ### * Available in OpenSolaris, FreeBSD and Linux, via compatibility layer
+
+<img src="zfs.png"></img>
+
 ---
 
 ## Raid controller
@@ -154,6 +158,7 @@ because the underlying layer *knows* with blocks are really used
 
 *There was only one drive that survived the torturing: the Intel S3500.
 After more than 6,500 power-cycles, not a single byte of data was lost*
+( http://lkcl.net/reports/ssd_analysis.html )
 <img src="ssd.png"></img>
 ---
 
@@ -182,6 +187,8 @@ mirror <device1> <device2> mirror <device3> <device4>
 Standard cluster membership component
 
 <*insert here a picture of a server rack, if possible everything black*>
+
+<img src="corosync.png"></img>
 
 --- 
 ### Why do we want a cluster by the way ? 
