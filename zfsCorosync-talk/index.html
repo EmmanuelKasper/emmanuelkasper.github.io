@@ -97,7 +97,7 @@ sometimes command-line has its limit
 <img src="openstack.png"></img>
 ---
 
- * key/value config file with unix like syntax
+ * key/value config file with unix-like syntax
 
 ```
 # qm config 200
@@ -152,7 +152,7 @@ faster snapshots
 because the underlying layer *knows* with blocks are really used 
 ---
 
-## one thing right raid controllers got right: BBU
+## one thing raid controllers got right: BBU
  * can be replaced with a Single Intent Log SSD device with capacitor
  * for instance Intel S3500:
 
@@ -165,7 +165,7 @@ After more than 6,500 power-cycles, not a single byte of data was lost*
 ## good use case for storing VMs
 
  * ZFS with ZVOLs and thin provisioning
- * can add SSDs as write cache or read cache
+ * can add SSDs as write cache (SLOG) or read cache (ARC2 cache)
  * zfs send and zfs receive for backing up zvols
 ---
 
@@ -192,9 +192,9 @@ Standard cluster membership component
 
 --- 
 ### Why do we want a cluster by the way ? 
- * From a single web interface, we want administrate a group of servers.
- * Goal is clear but what do happens if in my 5 cluster group, three of them are 
-down and I want to change a Groupwide setting ( default proxy, keyboard conf,
+ * From a single web interface, we want to administrate a group of servers.
+ * Goal is clear but what do happen if in my 5 cluster group, three of them are 
+down and I want to change a groupwide setting ( default proxy, keyboard conf,
 backup plan ...) 
  * Need a way to check if I am entitled to do so.
 
@@ -209,18 +209,20 @@ Operating decision are done by a *resource manager*
  * each server joins a multicast group
  * pass a token to its neighbour
  * if no answer, then kicked out of the group
+
 Just like in rock bands, if you don't show up  they kick you out. 
 
 --- 
 ### The ressource manager
  * CRM from Redhat and Suse if you like XML
- * PVE has its own implementation
- * When Corosync notifies that the quorum is there ( you're "quorate") then PVE
+ * PVE has its own resource manager
+ * Corosync notifies that the quorum is there ( you're "quorate") then PVE
 starts a cluster filesystem
 
 ```
 #include <corosync/quorum.h>
 result = quorum_context_get(handle, (gconstpointer *)&private);
+cfs_loop_start_worker(corosync_loop);
 ```
 ---
 Verify cluster status in the shell
