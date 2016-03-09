@@ -221,29 +221,19 @@ backup plan ...)
 ---
 ### Corosync only cares about: 
  * how many servers servers in my group currently ?
+ * send *this* message to all group members
  * are there enough servers to make operating decisions ?
-Operating decision are done by a *resource manager* 
+Operating decision are done by a *resource manager*
 
 ---
-### Technical implementation:
+### Implementation overview:
  * each server joins a multicast group
  * pass a token to its neighbour
  * if no answer, then kicked out of the group
+ * modifications allowed to cluster objects if *quorum* is reached
 
-Just like in rock bands, if you don't show up  they kick you out. 
+Just like in rock bands, if you don't show up  they kick you out.
 
---- 
-### The resource manager
- * CRM from Redhat and Suse if you like XML
- * PVE has its own resource manager
- * Corosync notifies that the quorum is there ( you're "quorate") then PVE
-starts a cluster filesystem
-
-```
-#include <corosync/quorum.h>
-result = quorum_context_get(handle, (gconstpointer *)&private);
-cfs_loop_start_worker(corosync_loop);
-```
 ---
 Verify cluster status in the shell
 
@@ -277,6 +267,36 @@ _______________________
          4          1 pve4-corosync
 ```
 
+Now from any of these fours servers, you can create, destroy VMs, configure
+firewall, backups 
+
+---
+### Managing resources in the cluster
+ * Pacemaker uses XML and special tools for its CIB 
+ * PVE has its own cluster filesystem: *pmxcfs*
+ * Corosync notifies that the quorum is there ( you're "quorate") then PVE
+starts a cluster filesystem
+
+---
+### Overview of the Proxmox Cluster Filesystem
+
+* starts an memory based FS mounted in /etc/pve
+* writes are replicated to all cluster members via corosync messaging
+* copy of the cluster configuration in a sqlite database
+* allows you to use standard unix tools ( grep, vi) to edit each object
+
+```
+root@px1:~# mount | grep /etc/pve
+/dev/fuse on /etc/pve type fuse (rw,nosuid,nodev,relatime, ...)
+```
+
+```
+grep ostype /etc/pve/nodes/*/qemu-server/*
+/etc/pve/nodes/pve4/qemu-server/401.conf:ostype: win7
+/etc/pve/nodes/pve4/qemu-server/402.conf:ostype: l26
+/etc/pve/nodes/px2/qemu-server/200.conf:ostype: win8
+/etc/pve/nodes/px2/qemu-server/201.conf.18455.tmp:ostype: l26
+```
 ---
 ![That's all folks](end.jpg)
 
