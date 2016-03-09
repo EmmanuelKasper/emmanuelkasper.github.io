@@ -158,7 +158,7 @@ sockets: 1
  * prone to 'hardware envy'
 ---
 
-## Less layers than usual solutions
+## Fewer layers than usual solutions
 ### typical Linux server has
 hard disk <-> soft or hard raid <-> PV <-> VG <-> raw disk image in Logical Volume
 ### zfs has
@@ -167,9 +167,9 @@ hard disk <-> ZFS pool <-> raw disk image in ZVOL
 ---
 
 ## "rampant layer violation"
-but faster software raid recovery
-faster snapshots
-because the underlying layer *knows* with blocks are really used 
+but faster software raid recovery,
+faster snapshots,
+because the underlying layer *knows* which blocks are really used 
 ---
 
 ## one thing raid controllers got right: BBU
@@ -213,7 +213,7 @@ Standard cluster membership component
 --- 
 ### Why do we want a cluster by the way ? 
  * From a single web interface, we want to administrate a group of servers.
- * Goal is clear but what do happen if in my 5 cluster group, three of them are 
+ * Goal is clear but what happens if in my 5 cluster group, three of them are 
 down and I want to change a groupwide setting ( default proxy, keyboard conf,
 backup plan ...) 
  * Need a way to check if I am entitled to do so.
@@ -233,7 +233,7 @@ Operating decision are done by a *resource manager*
 Just like in rock bands, if you don't show up  they kick you out. 
 
 --- 
-### The ressource manager
+### The resource manager
  * CRM from Redhat and Suse if you like XML
  * PVE has its own resource manager
  * Corosync notifies that the quorum is there ( you're "quorate") then PVE
