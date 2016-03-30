@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <head>
 <meta charset="utf-8">
 
-<title>ZFS and Corosync Cluster: Advanced Features of Proxmox VE</title>
+<title>ZFS and Corosync Cluster: Advanced Features of Proxmox VE - linuxwochen 2016 Wien</title>
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style"
 	content="black-translucent" />
@@ -58,9 +58,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 				<script type="text/template">
 #ZFS and Corosync Cluster
 
-<img src="zfs.png"></img>
-<img src="corosync.png"></img>
-<img src="proxmox-logo.png"></img>
+![alt text](proxmox-logo.png)
+
+![alt text](linuxwochen.png)
 
 *Advanced Features of Proxmox VE*
 ---
@@ -68,14 +68,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ## Who am I 
  * French, living in Austria
  * Debian Maintainer since 5 years (through games packaging)
- * Longtime sysadmin, got bored of creating user accounts, now developer at Proxmox
+ * Longtime sysadmin, got bored of creating user accounts, now developer at
+Proxmox Server Solutions
 ---
 
 ## What is Proxmox VE ?
- * 8 years old platform for managing VMs
+ * 8 years old platform for managing VMs and containers
  * Perl library on top of KVM / LXC / ZFS / Ceph which exposes a REST API
- * REST API is consumed by web interface and command line tools for managing VMs
+ * REST API is consumed by web interface and command line tools
  * Based on Debian Stable, AGPLv3 licensed
+ * Commercial support available for entreprise customers
+ * 29 000 forum members, 6 000 entreprise customers
 ---
 
 ## Tries not to be over elitist
@@ -136,6 +139,7 @@ smbios1: uuid=e5d47099-982d-4998-b85d-83ebbec8bab5
 sockets: 1
 ```
  * web gui with autorefresh
+
 <img src="proxmox-dashboard.png"></img>
 
 ---
@@ -144,8 +148,6 @@ sockets: 1
 ### * Designed by Sun, started production in 2006
 ### * Aims to replace raid controller, software raid, LVM, file system (Ext4/UFS)
 ### * Available in OpenSolaris, FreeBSD and Linux, via compatibility layer
-
-<img src="zfs.png"></img>
 
 ---
 
@@ -208,8 +210,6 @@ Standard cluster membership component
 
 <*insert here a picture of a server rack, if possible everything black*>
 
-<img src="corosync.png"></img>
-
 --- 
 ### Why do we want a cluster by the way ? 
  * From a single web interface, we want to administrate a group of servers.
@@ -220,7 +220,7 @@ backup plan ...)
 
 ---
 ### Corosync only cares about: 
- * how many servers servers in my group currently ?
+ * how many servers in my group currently ?
  * send *this* message to all group members
  * are there enough servers to make operating decisions ?
 Operating decision are done by a *resource manager*
