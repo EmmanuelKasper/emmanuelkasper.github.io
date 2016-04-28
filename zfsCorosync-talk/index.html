@@ -81,6 +81,10 @@ Proxmox Server Solutions
  * 30 000 forum members, 6 000 entreprise customers
 ---
 
+## web gui as a single page AJAX application
+<img src="proxmox-dashboard.png"></img>
+---
+
 ## Tries not to be over elitist
 sometimes command-line has its limit
 (example from kvm wiki)
@@ -120,7 +124,7 @@ sometimes command-line has its limit
 <img src="openstack.png"></img>
 ---
 
- * key/value config file with unix-like syntax
+ * key/value configs file with unix-like syntax
 
 ```
 # qm config 200
@@ -138,9 +142,25 @@ ostype: win8
 smbios1: uuid=e5d47099-982d-4998-b85d-83ebbec8bab5
 sockets: 1
 ```
- * web gui with autorefresh
+ * man pages for every command
 
-<img src="proxmox-dashboard.png"></img>
+```
+vzdump(1) Proxmox Documentation vzdump(1)
+NAME
+	vzdump - backup utility for virtual machine
+
+SYNOPSIS
+	vzdump help
+
+	vzdump {<vmid>} [OPTIONS]
+	<vmid>     string
+
+		The ID of the VM you want to backup.
+
+	-all      boolean   (default=0)
+
+	Backup all known VMs on this host.
+```
 
 ---
 ## What is ZFS
@@ -298,6 +318,12 @@ grep ostype /etc/pve/nodes/*/qemu-server/*
 /etc/pve/nodes/px2/qemu-server/201.conf.18455.tmp:ostype: l26
 ```
 ---
+
+### the result: a multi master cluster
+you can administrate it from every node member
+<img src="cluster.png"></img>
+---
+
 ![That's all folks](end.jpg)
 
 
